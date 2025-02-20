@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/goit-js-hw-11/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/goit-js-hw-11/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-D0cagnvz.js">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/vendor-DumFYO8Z.css">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/index-D4lckmmb.css">
+  </head>
+  <body>
+    <header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a class="nav-logo" href="./index.html" aria-label="Site logo">
+        <svg class="nav-logo-icon" width="100" height="30">
+          <use href="/goit-js-hw-11/assets/sprite-E8vg0sBb.svg#logo"></use>
+        </svg>
+      </a>
+    </nav>
+  </div>
+</header>
+
+    <main>
+      <section id="gallery" class="galery-form">
+        <div class="container">
+          <h2 class="title">Search image</h2>
+          <form class="form">
+            <input
+              class="form__input js-form-input"
+              type="text"
+              name="search"
+              placeholder="Search image..."
+              autofocus
+            />
+            <button type="submit" class="form__btn js-form-btn">Search</button>
+          </form>
+
+          <ul class="gallery js-gallery"></ul>
+          <span class="loader"></span>
+          <button type="button" class="search-btn js-search-btn">
+            Load more
+          </button>
+          <a href="#gallery" class="pageup-btn js-pageup-btn">Page Up</a>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="footer-desc">
+      Made with ✨ by
+      <a
+        class="footer-link"
+        href="https://goit.global/ua/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GoIT team
+      </a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
