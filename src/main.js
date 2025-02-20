@@ -113,6 +113,8 @@ async function onSearch(e) {
       );
       searchImageBtn.style.display = 'none';
       errorAlertInstance.error();
+      searchForm.reset();
+      imgList.innerHTML = '';
       return;
     }
     imgList.innerHTML = '';
