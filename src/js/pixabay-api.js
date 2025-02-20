@@ -7,6 +7,8 @@ async function fetchImage({
   type,
   orientation,
   safesearch,
+  page,
+  perPage,
 }) {
   const response = await axios.get(urlBase, {
     params: {
@@ -15,9 +17,13 @@ async function fetchImage({
       image_type: type,
       orientation: orientation,
       safesearch: safesearch,
+      page: page,
+      per_page: perPage,
     },
   });
-  return response.data;
+
+  console.log(' response', response);
+  return response;
 }
 
 export default fetchImage;

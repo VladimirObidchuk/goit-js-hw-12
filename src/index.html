@@ -16,7 +16,7 @@
   <body>
     <load src="./partials/header.html" icon-path="img/sprite.svg#logo" />
     <main>
-      <section class="galery-form">
+      <section id="gallery" class="galery-form">
         <div class="container">
           <h2 class="title">Search image</h2>
           <form class="form">
@@ -29,8 +29,13 @@
             />
             <button type="submit" class="form__btn js-form-btn">Search</button>
           </form>
+
+          <ul class="gallery js-gallery"></ul>
           <span class="loader"></span>
-          <ul class="gallery"></ul>
+          <button type="button" class="search-btn js-search-btn">
+            Load more
+          </button>
+          <a href="#gallery" class="pageup-btn js-pageup-btn">Page Up</a>
         </div>
       </section>
     </main>
