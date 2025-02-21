@@ -73,7 +73,7 @@ const InfoAlertInstans = new InfoAlert();
 
 const imgList = document.querySelector('.js-gallery');
 const searchForm = document.querySelector('.form');
-const loader = document.querySelector('.loader');
+const loader = document.querySelector('.js-loader');
 const searchImageBtn = document.querySelector('.js-search-btn');
 const pageUpBtn = document.querySelector('.js-pageup-btn');
 
@@ -90,7 +90,9 @@ function searchInputExpretion() {
   if (searchData === '') {
     InfoAlertInstans.updateMessage('Please enter a search term');
     InfoAlertInstans.info();
-    return;
+    imgList.innerHTML = '';
+    searchImageBtn.style.display = 'none';
+    return null;
   }
   return searchData;
 }
@@ -103,7 +105,6 @@ async function onSearch(e) {
     return;
   }
   parametersObject.searchExpression = searchInputExpretion();
-
   try {
     loader.style.display = 'inline-block';
     const gallery = await fetchImage(parametersObject);
@@ -117,10 +118,10 @@ async function onSearch(e) {
       imgList.innerHTML = '';
       return;
     }
+
     imgList.innerHTML = '';
     imgList.insertAdjacentHTML('beforeend', renderGaleryImg(gallery.data.hits));
     searchImageBtn.style.display = 'block';
-
     galleryInner = new SimpleLightbox('.gallery a', {
       captions: true,
       captionsData: 'alt',
@@ -141,6 +142,7 @@ async function onSearch(e) {
   } catch (error) {
     searchImageBtn.style.display = 'none';
     pageUpBtn.style.display = 'none';
+    loader.style.display = 'none';
     console.log(error);
   } finally {
     loader.style.display = 'none';
@@ -150,34 +152,45 @@ async function onSearch(e) {
 
 function onLoadMore() {
   parametersObject.page += 1;
-  loader.style.display = 'block';
 
   galleryInner.refresh();
 
+  loader.style.display = 'block';
   fetchImage(parametersObject).then(gallery => {
-    imgList.insertAdjacentHTML(
-      'beforeend',
-      renderGaleryImg(gallery.data.hits, page)
-    );
-
-    galleryInner.refresh();
-    const totalPages = Math.ceil(gallery.data.totalHits / perPage);
-    const getHeightImgCard = () =>
-      document.querySelector('.gallery-item').getBoundingClientRect();
-    window.scrollBy({
-      top: getHeightImgCard().height * 2,
-      left: 0,
-      behavior: 'smooth',
-    });
-    loader.style.display = 'none';
-    pageUpBtn.style.display = 'flex';
-    if (parametersObject.page === totalPages) {
-      InfoAlertInstans.updateMessage(
-        "We're sorry, but you've reached the end of search results."
+    try {
+      imgList.insertAdjacentHTML(
+        'beforeend',
+        renderGaleryImg(gallery.data.hits, page)
       );
-      InfoAlertInstans.info();
+
+      galleryInner.refresh();
+
+      const totalPages = Math.ceil(gallery.data.totalHits / perPage);
+      if (parametersObject.page >= totalPages) {
+        InfoAlertInstans.updateMessage(
+          "We're sorry, but you've reached the end of search results."
+        );
+        InfoAlertInstans.info();
+        loader.style.display = 'none';
+        searchImageBtn.style.display = 'none';
+        return;
+      }
+      const getHeightImgCard = () =>
+        document.querySelector('.gallery-item').getBoundingClientRect();
+      window.scrollBy({
+        top: getHeightImgCard().height,
+        left: 0,
+        behavior: 'smooth',
+      });
       loader.style.display = 'none';
-      searchImageBtn.style.display = 'none';
+      pageUpBtn.style.display = 'flex';
+    } catch (error) {
+      errorAlertInstance.updateMessage(
+        'Sorry, there are no images matching your search query. Please try again!'
+      );
+      errorAlertInstance.error();
+    } finally {
+      loader.style.display = 'none';
     }
   });
 }

@@ -21,8 +21,6 @@ async function fetchImage({
       per_page: perPage,
     },
   });
-
-  console.log(' response', response);
   return response;
 }
 

@@ -110,19 +110,21 @@
   color: #fff;
   background: currentColor;
   box-shadow: 32px 0, -32px 0, 64px 0;
-
-  .loader::after {
-    content: '';
-    position: absolute;
-    left: -32px;
-    top: 0;
-    width: 16px;
-    height: 16px;
-    border-radius: 10px;
-    background: #ff3d00;
-    animation: move 3s linear infinite alternate;
-  }
+  margin: 10px 0;
 }
+
+.loader::after {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 10px;
+  background: #ff3d00;
+  animation: move 3s linear infinite alternate;
+}
+
 @keyframes move {
   0%,
   5% {
