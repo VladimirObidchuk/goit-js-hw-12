@@ -92,6 +92,7 @@ function searchInputExpretion() {
     InfoAlertInstans.info();
     imgList.innerHTML = '';
     searchImageBtn.style.display = 'none';
+    pageUpBtn.style.display = 'none';
     return null;
   }
   return searchData;
@@ -113,6 +114,7 @@ async function onSearch(e) {
         'Sorry, there are no images matching your search query. Please try again!'
       );
       searchImageBtn.style.display = 'none';
+      pageUpBtn.style.display = 'none';
       errorAlertInstance.error();
       searchForm.reset();
       imgList.innerHTML = '';
