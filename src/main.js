@@ -85,8 +85,8 @@ let galleryInner = null;
 
 function searchInputExpretion() {
   const searchInput = document.querySelector('.js-form-input');
-  searchData = searchInput.value.replace(/\d+/g, '').replace(/ /g, '+').trim();
-
+  searchData = searchInput.value.trim();
+  // searchData = e.target.elements.request.value.trim();
   if (searchData === '') {
     InfoAlertInstans.updateMessage('Please enter a search term');
     InfoAlertInstans.info();
@@ -101,14 +101,16 @@ function searchInputExpretion() {
 async function onSearch(e) {
   e.preventDefault();
   const searchExpression = searchInputExpretion();
-
   if (!searchExpression) {
     return;
   }
   parametersObject.searchExpression = searchInputExpretion();
   try {
+    console.log(' parametersObject', parametersObject.page);
+    parametersObject.page = 1;
     loader.style.display = 'inline-block';
     const gallery = await fetchImage(parametersObject);
+
     if (gallery.data.hits.length === 0) {
       errorAlertInstance.updateMessage(
         'Sorry, there are no images matching your search query. Please try again!'
